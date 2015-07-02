@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head lang="en">
+<meta charset="utf-8">
+<title>运动框架回到顶部1</title>
+</head>
+<style>
+ *{ margin: 0; padding: 0;}	
+ body{ 
+  height: 3000px;
+ }
+ #div1{ 
+ 	color: #fff; font-size: .9rem;
+    position: fixed;
+    right: 50px; bottom: 30px;
+    width: 20px; height: 50px;
+    text-align: center; line-height: 15px;
+    border: 1px solid #f50;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background: linear-gradient(to top,#f60 20%,#f98 80%);
+    cursor: pointer;
+
+ }
+</style>
+<body>
+<div id="div1">回顶部</div>
+<script>
+  window.onload = function(){ 
+
+  	var oDiv = document.getElementById('div1');
+  	var iTimer = null;
+  	oDiv.onclick = function(){ 
+  	 var oldTime = new Date().getTime();
+  	 var sT = document.body.scrollTop; //获取元素现在的scrollTtop
+  	 //获取差值，直到5秒停止
+  	 iTimer = setInterval(function(){ 
+  	 	var newTime = new Date().getTime();
+  	 	var iNow =  newTime - oldTime;  //时间的差值
+  	 	var thisT = document.body.scrollTop;
+  	 	//总共的时长，例如5000毫秒,先判断不能让时间超过5000
+  	 	if(iNow > 5000){ 
+  	 	  iNow = 5000;
+  	 	  clearInterval(iTimer);
+  	 	}
+  	 	console.log(0+sT*(iNow/5000))
+  	 },16);
+
+  	};
+
+  };
+</script>
+</body>
+</html>
