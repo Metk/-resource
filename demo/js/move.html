@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head lang="en">
 <meta charset="utf-8">
-<title>运动框架回到顶部1</title>
+<title>运动框架回到顶部</title>
 </head>
 <style>
  *{ margin: 0; padding: 0;}	
@@ -28,22 +28,21 @@
   window.onload = function(){ 
 
   	var oDiv = document.getElementById('div1');
-  	var iTimer = null;
+  	var iTimer = null; 
+       var sumTime = 3000; //持续时间
   	oDiv.onclick = function(){ 
-  	 var oldTime = new Date().getTime();
-  	 var sT = document.body.scrollTop; //获取元素现在的scrollTtop
-  	 //获取差值，直到5秒停止
-  	 iTimer = setInterval(function(){ 
-  	 	var newTime = new Date().getTime();
-  	 	var iNow =  newTime - oldTime;  //时间的差值
-  	 	var thisT = document.body.scrollTop;
-  	 	//总共的时长，例如5000毫秒,先判断不能让时间超过5000
-  	 	if(iNow > 5000){ 
-  	 	  iNow = 5000;
-  	 	  clearInterval(iTimer);
-  	 	}
-  	 	console.log(0+sT*(iNow/5000))
-  	 },16);
+         var _Top = document.body.scrollTop; //要运动的距离
+  	  var startTime = new Date().getTime();  //点击时候的时间
+        iTimer = setInterval(function(){ 
+          var currentTime = new Date().getTime();  //当前的时间
+          var initial = currentTime - startTime;
+          if(initial > sumTime){ 
+             initial = sumTime;
+             clearInterval(iTimer);
+          }
+          document.body.scrollTop = _Top - _Top *( initial/sumTime );
+          console.log(initial)
+        },16);
 
   	};
 
