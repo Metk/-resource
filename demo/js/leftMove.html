@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>布局</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+<meta content="yes"name="apple-mobile-web-app-capable"/>
+<meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection"content="telphone=no"/>
+<style type="text/css">
+*{ margin:0;padding:0;list-style-type: none;}
+div{ position: absolute; left: 0; top: 0;width: 100px; height: 100px; background-color: #f60; }
+</style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+;(function(){ 
+ var divClick = {
+    On : function(){ 
+       var oDiv1 =  this.getId('div1');
+       var iTimer = null;
+       oDiv1.onclick = function(){ 
+          var startTime = new Date().getTime();
+          var sumTime = 3000;  //需要的时间
+          var iTarget = 500;
+          var initial = oDiv1.offsetLeft; 
+          iTimer = setInterval(function(){ 
+            var currentTime = new Date().getTime();
+            var t = currentTime - startTime;
+            if(t > sumTime){
+               t = sumTime;
+               clearInterval(iTimer);
+            }
+            if(oDiv1.offsetLeft == 500) return false ;
+            oDiv1.style.left = initial + iTarget*(t/sumTime)+'px';
+            console.log(500*(t/sumTime));
+          },16);
+       }
+    },
+    getId : function(obj){ 
+      return document.getElementById(obj);
+    }
+ }
+ divClick.On();
+})()
+</script>
+</body>
+</html>
